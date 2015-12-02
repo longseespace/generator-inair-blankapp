@@ -6,14 +6,18 @@ var helpers = require('yeoman-generator').test;
 describe('generator-inair-blankapp:app', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/app'))
-      .withOptions({someOption: true})
-      .withPrompts({someAnswer: true})
+      .withPrompts({
+        appName: 'TestApp',
+        packageName: 'inair.test'
+      })
       .on('end', done);
   });
 
   it('creates files', function () {
     assert.file([
-      'dummyfile.txt'
+      'TestApp/.gitignore',
+      'TestApp/build.gradle',
+      'TestApp/settings.gradle'
     ]);
   });
 });

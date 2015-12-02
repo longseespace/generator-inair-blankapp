@@ -3,7 +3,7 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var _ = require('underscore.string');
-var mkdirp = require('mkdirp')
+var mkdirp = require('mkdirp');
 
 var AndroidGradleGenerator = yeoman.generators.Base.extend({
 
@@ -11,7 +11,7 @@ var AndroidGradleGenerator = yeoman.generators.Base.extend({
     var done = this.async();
 
     // Have Yeoman greet the user.
-    this.log(yosay('This generator will allow you to create a minimal '+chalk.magenta('InAiR')+' project with Gradle support.'));
+    this.log(yosay('This generator will allow you to create a minimal ' + chalk.magenta('InAiR') + ' project with Gradle support.'));
 
     var prompts = [{
       type: 'input',
@@ -43,51 +43,51 @@ var AndroidGradleGenerator = yeoman.generators.Base.extend({
   },
 
   app: function () {
-    var _appDir = [
+    var appDir = [
       this.projectName,
-      this.projectName+'/app',
-      this.projectName+'/app/libs',
-      this.projectName+'/app/src',
-      this.projectName+'/app/src/androidTest',
-      this.projectName+'/app/src/androidTest/java',
-      this.projectName+'/app/src/main',
-      this.projectName+'/app/src/main/java',
-      this.projectName+'/app/src/main/res',
-      this.projectName+'/app/src/main/res/drawable',
-      this.projectName+'/app/src/main/res/layout',
-      this.projectName+'/app/src/main/res/values',
-      this.projectName+'/app/src/test',
-      this.projectName+'/app/src/test/java'
+      this.projectName + '/app',
+      this.projectName + '/app/libs',
+      this.projectName + '/app/src',
+      this.projectName + '/app/src/androidTest',
+      this.projectName + '/app/src/androidTest/java',
+      this.projectName + '/app/src/main',
+      this.projectName + '/app/src/main/java',
+      this.projectName + '/app/src/main/res',
+      this.projectName + '/app/src/main/res/drawable',
+      this.projectName + '/app/src/main/res/layout',
+      this.projectName + '/app/src/main/res/values',
+      this.projectName + '/app/src/test',
+      this.projectName + '/app/src/test/java'
     ];
 
     this.log('\n' + chalk.green('Creating ') + 'project directories:');
-    var _appDirLength = _appDir.length;
+    var appDirLength = appDir.length;
 
-    for (var idx = 0; idx < _appDirLength; idx++) {
-      mkdirp(_appDir[idx]);
-      this.log('\t' + chalk.green('create ') + _appDir[idx]);
+    for (var idx = 0; idx < appDirLength; idx++) {
+      mkdirp(appDir[idx]);
+      this.log('\t' + chalk.green('create ') + appDir[idx]);
     }
 
-    this.directory('gradle', this.projectName+'/gradle');
-    this.log('\t' + chalk.green('create ') + this.projectName+'/gradle');
+    this.directory('gradle', this.projectName + '/gradle');
+    this.log('\t' + chalk.green('create ') + this.projectName + '/gradle');
 
-    this.directory('inair', this.projectName+'/inair');
-    this.log('\t' + chalk.green('create ') + this.projectName+'/inair');
+    this.directory('inair', this.projectName + '/inair');
+    this.log('\t' + chalk.green('create ') + this.projectName + '/inair');
   },
 
   end: function () {
-    this.log("\n");
-    this.log("Finished creating your " + chalk.red.bold(this.appName) + " InAiR+Gradle application.");
-    this.log("Please update the " + chalk.yellow.bold('local.properties') + " with the Android SDK path");
-    this.log("\nOpen your favorite IDE and have fun building your next great app.");
-    this.log("\n");
-  },
+    this.log('\n');
+    this.log('Finished creating your ' + chalk.red.bold(this.appName) + ' InAiR+Gradle application.');
+    this.log('Please update the ' + chalk.yellow.bold('local.properties') + ' with the Android SDK path');
+    this.log('\nOpen your favorite IDE and have fun building your next great app.');
+    this.log('\n');
+  }
 });
 
 module.exports = AndroidGradleGenerator;
 
 AndroidGradleGenerator.prototype.workspaceFiles = function workspaceFiles() {
-  var _configs = [
+  var configs = [
     'build.gradle',
     'gradle.properties',
     'gradlew',
@@ -96,21 +96,21 @@ AndroidGradleGenerator.prototype.workspaceFiles = function workspaceFiles() {
     'settings.gradle'
   ];
 
-  var _configLength = _configs.length;
+  var configLength = configs.length;
 
-  for (var idx = 0; idx < _configLength; idx++) {
-    this.template(_configs[idx], this.projectName+'/'+_configs[idx]);
+  for (var idx = 0; idx < configLength; idx++) {
+    this.template(configs[idx], this.projectName + '/' + configs[idx]);
   }
 
-  this.template('gitignore', this.projectName+'/.gitignore');
+  this.template('gitignore', this.projectName + '/.gitignore');
 };
 
 AndroidGradleGenerator.prototype.androidSrcFiles = function androidSrcFiles() {
   this.log('\n' + chalk.green('Creating ') + 'app files:');
 
-  this.template('app/build.gradle', this.projectName+'/app/build.gradle');
-  this.template('app/proguard-rules.pro', this.projectName+'/app/proguard-rules.pro');
-  this.directory('app/libs', this.projectName+'/app/libs');
+  this.template('app/build.gradle', this.projectName + '/app/build.gradle');
+  this.template('app/proguard-rules.pro', this.projectName + '/app/proguard-rules.pro');
+  this.directory('app/libs', this.projectName + '/app/libs');
 
   var androidTestDir = this.projectName + '/app/src/androidTest/java/' + this.packageFolder;
   this.template('app/src/androidTest/java/ApplicationTest.java', androidTestDir + '/ApplicationTest.java');
